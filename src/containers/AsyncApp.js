@@ -7,7 +7,7 @@ import {
     invalidateSubreddit
  } from "../actions";
 
-
+ import {  Grid } from "semantic-ui-react";
  import Picker from "../Components/Picker";
  import Posts from "../Components/Posts";
 
@@ -19,6 +19,7 @@ import {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleRefreshClick = this.handleRefreshClick.bind(this);
+        this.onSearch = this.onSearch.bind(this);
      }
 
 
@@ -41,8 +42,12 @@ import {
      
      }
 
-     onSearch(subreddit) {
-         this.props.dispatch(fetchPostsIfNeeded(subreddit));
+     onSearch(subreddit, e) {
+
+        if(e.key === 'Enter'){
+            this.props.dispatch(fetchPostsIfNeeded(subreddit));  
+        }
+         
      }
 
 
@@ -56,7 +61,7 @@ import {
 
 
      render(){
-         const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
+         const { selectedSubreddit, posts, isFetching, lastUpdated, onSearch } = this.props;
          const isEmpty = posts.length === 0;
 
          return  (
@@ -65,6 +70,7 @@ import {
                  value={selectedSubreddit}
                  onChange={this.handleChange}
                  options={['reactjs','frontend']}
+                 onSearch={this.onSearch}
 
                  />
                  <p>
@@ -83,7 +89,9 @@ import {
                  {isEmpty
                  ? (isFetching ? <h2>Loading...</h2> : <h2>Empty</h2>)  
                  : <div style={{opacity:isFetching ? 0.5 : 1}}>
-                     <Posts posts={posts}/>
+                     <Grid columns={3} >                     
+                            <Posts posts={posts}/>                 
+                     </Grid>
                      </div>
                  }
              </div>

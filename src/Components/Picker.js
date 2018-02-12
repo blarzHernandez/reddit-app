@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 
-const Picker = ({ value, onChange, options }) =>
+const Picker = ({ value, onChange,onSearch, options }) =>
         (
             <span>
                 <h1>{value}</h1>
@@ -13,7 +13,7 @@ const Picker = ({ value, onChange, options }) =>
                     </option>
                 )}
                 </select>
-                <input type="text" onChange={ e => onChange(e.target.value)} placeholder="Search subreddit"/>
+                
             </span>
         )
     
