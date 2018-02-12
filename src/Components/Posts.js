@@ -1,11 +1,17 @@
 import React,{ Component } from "react";
 import PropTypes from "prop-types";
-import {  Grid, Card } from "semantic-ui-react";
+import {  Grid, Card, Icon, Image} from "semantic-ui-react";
 
 
 export default class Posts extends Component{
 
+    //truncate function
+ truncateText(text, limit){
+     const shorted = text.indexOf(' ', limit);
+     if(shorted === -1) return text;
+     return text.substring(0, shorted) + '...';
 
+ }
     render(){
        
         return(
@@ -14,12 +20,19 @@ export default class Posts extends Component{
               
                 {this.props.posts.map( (post,i) => 
                     <Grid.Column key={i}>
-                         <Card
-                            image={post.preview ? post.preview.images[0].source.url : 'https://cdn.comparitech.com/wp-content/uploads/2017/08/reddit-1.jpg'}
-                            header= {post.title}
-                            description={post.description}
-                         >
-                             
+                         <Card fluid>
+                            <Card.Content>
+                           <Image src= {post.preview ? post.preview.images[0].source.url : 'https://cdn.comparitech.com/wp-content/uploads/2017/08/reddit-1.jpg'}/>
+                                <Card.Header>{post.title}</Card.Header>
+                                <Card.Meta></Card.Meta>
+                                <Card.Description>{this.truncateText(post.selftext,50)}</Card.Description>                                
+                            </Card.Content>
+                            <Card.Content extra>
+                                <a>
+                                    <Icon name ="user"/>
+                                    Read More..
+                                </a>
+                            </Card.Content>                             
                          </Card>
                     </Grid.Column>)}
                 
