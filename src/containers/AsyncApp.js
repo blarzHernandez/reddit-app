@@ -38,6 +38,7 @@ import {
 
 
      handleChange(nextSubreddit){
+      
          this.props.dispatch(selectSubreddit(nextSubreddit));
      
      }
@@ -69,7 +70,7 @@ import {
                  <Picker
                  value={selectedSubreddit}
                  onChange={this.handleChange}
-                 options={['reactjs','frontend']}
+                 options={[{key:'r', text:"reactjs", value:"reactjs"},{key:'f', text:"frontend", value:"frontend"}]}
                  onSearch={this.onSearch}
 
                  />

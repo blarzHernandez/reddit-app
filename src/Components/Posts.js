@@ -1,6 +1,6 @@
 import React,{ Component } from "react";
 import PropTypes from "prop-types";
-import {  Grid, Card, Icon, Image} from "semantic-ui-react";
+import {  Grid, Card, Icon, Image, Button} from "semantic-ui-react";
 
 
 export default class Posts extends Component{
@@ -22,15 +22,17 @@ export default class Posts extends Component{
                     <Grid.Column key={i}>
                          <Card fluid>
                             <Card.Content>
+                          <a href = {post.url} target='_blank'>
                            <Image src= {post.preview ? post.preview.images[0].source.url : 'https://cdn.comparitech.com/wp-content/uploads/2017/08/reddit-1.jpg'}/>
+
+                           </a>
                                 <Card.Header>{post.title}</Card.Header>
                                 <Card.Meta></Card.Meta>
                                 <Card.Description>{this.truncateText(post.selftext,50)}</Card.Description>                                
                             </Card.Content>
-                            <Card.Content extra>
-                                <a>
-                                    <Icon name ="user"/>
-                                    Read More..
+                            <Card.Content extra>                             
+                                <a href={post.url} target='_blank'>
+                                    <Button circular color='facebook' content='Read More..'/>                                  
                                 </a>
                             </Card.Content>                             
                          </Card>
