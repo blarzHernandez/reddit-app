@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { Form, Select  } from "semantic-ui-react";
+import { Form, Select, Input  } from "semantic-ui-react";
 
+
+const onSearch = (e, text) => {
+
+}
 const Picker = ({ value, onChange,onSearch, options }) =>
         // (
         //     <span>
@@ -23,10 +27,12 @@ const Picker = ({ value, onChange,onSearch, options }) =>
         (
                  <span>                
             <h1>{value}</h1> 
-                      
-                <Form.Field control={Select} onChange={(e,{ value })=>  onChange(value) } 
+              <Form>    
+                  <Form.Field onKeyPress={ e =>{ if(e.which == 13) onChange (e.target.value)}} control={Input} label='Search a term' placeholder='Type a word' />    
+                <Form.Field label='Select a Topic!' control={Select} onChange={(e,{ value })=>  onChange(value) } 
                     options = {options}
-                />                 
+                /> 
+            </Form>                
             </span>             
         
         )

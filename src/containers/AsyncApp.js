@@ -7,7 +7,7 @@ import {
     invalidateSubreddit
  } from "../actions";
 
- import {  Grid } from "semantic-ui-react";
+ import {  Grid , Container} from "semantic-ui-react";
  import Picker from "../Components/Picker";
  import Posts from "../Components/Posts";
 
@@ -64,37 +64,40 @@ import {
      render(){
          const { selectedSubreddit, posts, isFetching, lastUpdated, onSearch } = this.props;
          const isEmpty = posts.length === 0;
+         console.log("isEmpty", isEmpty);
 
          return  (
              <div>
-                 <Picker
-                 value={selectedSubreddit}
-                 onChange={this.handleChange}
-                 options={[{key:'r', text:"reactjs", value:"reactjs"},{key:'f', text:"frontend", value:"frontend"}]}
-                 onSearch={this.onSearch}
+                 <Container fluid>
+                    <Picker
+                    value={selectedSubreddit}
+                    onChange={this.handleChange}
+                    options={[{key:'r', text:"reactjs", value:"reactjs"},{key:'f', text:"frontend", value:"frontend"}]}
+                    onSearch={this.onSearch}
 
-                 />
-                 <p>
-                     {lastUpdated && 
-                     <span>
-                         Last updated at { new Date (lastUpdated).toLocaleTimeString() }.
-                         { '  '}
-                     </span>}
-                     {
-                         !isFetching && 
-                         <button onClick={this.handleRefreshClick}> Refresh</button>
-                     }
+                    />
+                    <p>
+                        {lastUpdated && 
+                        <span>
+                            Last updated at { new Date (lastUpdated).toLocaleTimeString() }.
+                            { '  '}
+                        </span>}
+                        {
+                            !isFetching && 
+                            <button onClick={this.handleRefreshClick}> Refresh</button>
+                        }
+                        
+                    </p>
                     
-                 </p>
-                
-                 {isEmpty
-                 ? (isFetching ? <h2>Loading...</h2> : <h2>Empty</h2>)  
-                 : <div style={{opacity:isFetching ? 0.5 : 1}}>
-                     <Grid columns={3} >                     
-                            <Posts posts={posts}/>                 
-                     </Grid>
-                     </div>
-                 }
+                    {isEmpty
+                    ? (isFetching ? <h2>Loading...</h2> : <h2>No data Found</h2>)  
+                    : <div style={{opacity:isFetching ? 0.5 : 1}}>
+                        <Grid columns={3} >                     
+                                <Posts posts={posts}/>                 
+                        </Grid>
+                        </div>
+                    }
+                 </Container>
              </div>
          )
 
